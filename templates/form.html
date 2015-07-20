@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block content %}
+    {% if error %}
+        <div class="error">
+            {{ error }}
+        </div>
+    {% endif %}
+
+    <form action="" method="POST">
+        <div class="field">
+            <label for="original_time">Hora prevista:</label>
+            <input type="time" name="original_time" id="formOriginalTime">
+        </div>
+
+        <div class="field">
+            <label for="arrival_time">Hora de llegada:</label>
+            <input type="time" name="arrival_time" id="formArrivalTime">
+        </div>
+
+        <div class="field">
+            <label for="date">Fecha:</label>
+            <input type="date" name="date" id="formDate">
+        </div>
+
+        <div class="field">
+            <label for="password">Contraseña:</label>
+            <input type="password" name="password" id="formDate">
+        </div>
+
+        <input type="submit" value="Enviar">
+
+        <script>
+            // Fill in the current date and time
+
+            var date = new Date();
+            var timeStr = date.getHours() + ":" + date.getMinutes();
+            var arrivalTimeStr = date.getHours() + ":" + (date.getMinutes() + 7);
+            var dateStr = date.getFullYear() + "-"
+                        + (date.getMonth() < 10 ? "0" : "") + date.getMonth() + "-"
+                        + date.getDate();
+
+            document.getElementById("formOriginalTime").value = timeStr;
+            document.getElementById("formArrivalTime").value = timeStr;
+            document.getElementById("formDate").value = dateStr;
+        </script>
+    </form>
+{% endblock %}

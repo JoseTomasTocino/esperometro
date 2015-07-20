@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="stats default-primary-color">
+    <div class="number-with-label">
+        <div class="value">{{ stats.num_delays }}</div>
+        <div class="label">retrasos</div>
+    </div>
+    <div class="number-with-label">
+        <div class="value">{{ stats.average_delay|round(2) }}</div>
+        <div class="label">minutos de espera media</div>
+    </div>
+    <div class="number-with-label">
+        <div class="value">{{ stats.accumulated_delay }}</div>
+        <div class="label">minutos esperados en total</div>
+    </div>
+</div>
+
+{# <div class="headers">
+    <div>¿Cuánto?</div>
+    <div>¿Cuándo?</div>
+    <div>¿Horas?</div>
+</div> #}
+
+<div class="delays">
+    {% for delay in delays %}
+    <div class="delay">
+        <div class="minutes number-with-label">
+            <div class="value">{{delay.delay}}</div>
+            <div class="label">minutos</div>
+        </div>
+        <div class="date">
+            <em>{{ delay.arrival_time.strftime('%d de %B de %Y')}}</em>.
+        </div>
+        <div class="times">
+            Hora prevista: <strong>{{ delay.original_time.strftime('%H:%M')}}</strong><br>
+            Hora de llegada: <strong>{{ delay.arrival_time.strftime('%H:%M')}}</strong>
+        </div>
+    </div>
+
+    {% else %}
+        <div class="delay">
+         <div>
+             Sin retrasos
+         </div>
+        </div>
+    {% endfor %}
+
+</div>
+{% endblock %}
